@@ -6,6 +6,7 @@ namespace TraversalCoreProje.Controllers
 {
     public class DestinationController : Controller
     {
+        //destinations
         DestinationManager destinationManager = new DestinationManager(new EfDestinationDal());
         public IActionResult Index()
         {
