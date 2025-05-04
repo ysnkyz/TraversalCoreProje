@@ -16,7 +16,7 @@ namespace DataAccessLayer.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.17")
+                .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("EntityLayer.Concrete.About", b =>
@@ -71,6 +71,45 @@ namespace DataAccessLayer.Migrations
                     b.HasKey("About2ID");
 
                     b.ToTable("About2s");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Account", b =>
+                {
+                    b.Property<int>("AccountID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("Balance")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AccountID");
+
+                    b.ToTable("Accounts");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Announcement", b =>
+                {
+                    b.Property<int>("AnnouncementID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AnnouncementID");
+
+                    b.ToTable("Announcements");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.AppRole", b =>
@@ -188,6 +227,9 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("AppUserID")
+                        .HasColumnType("int");
+
                     b.Property<string>("CommentContent")
                         .HasColumnType("nvarchar(max)");
 
@@ -204,6 +246,8 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("CommentID");
+
+                    b.HasIndex("AppUserID");
 
                     b.HasIndex("DestinationID");
 
@@ -240,6 +284,36 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Contacts");
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.ContactUs", b =>
+                {
+                    b.Property<int>("ContactUsID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Mail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MessageBody")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("MessageDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("MessageStatus")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ContactUsID");
+
+                    b.ToTable("ContactUses");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.Destination", b =>
                 {
                     b.Property<int>("DestinationID")
@@ -256,6 +330,9 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("CoverImage")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("DayNight")
                         .HasColumnType("nvarchar(max)");
 
@@ -267,6 +344,9 @@ namespace DataAccessLayer.Migrations
 
                     b.Property<string>("Details2")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("GuideID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
@@ -281,6 +361,8 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("DestinationID");
+
+                    b.HasIndex("GuideID");
 
                     b.ToTable("Destinations");
                 });
@@ -343,6 +425,12 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Description2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GuideListImage")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
@@ -376,6 +464,40 @@ namespace DataAccessLayer.Migrations
                     b.HasKey("NewsletterID");
 
                     b.ToTable("Newsletters");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Reservation", b =>
+                {
+                    b.Property<int>("ReservationID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DestinationID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PersonCount")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ReservastionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ReservationID");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("DestinationID");
+
+                    b.ToTable("Reservations");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.SubAbout", b =>
@@ -523,11 +645,49 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Concrete.Comment", b =>
                 {
+                    b.HasOne("EntityLayer.Concrete.AppUser", "AppUser")
+                        .WithMany("Comments")
+                        .HasForeignKey("AppUserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("EntityLayer.Concrete.Destination", "Destination")
                         .WithMany("Comments")
                         .HasForeignKey("DestinationID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Destination");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Destination", b =>
+                {
+                    b.HasOne("EntityLayer.Concrete.Guide", "Guide")
+                        .WithMany("Destinations")
+                        .HasForeignKey("GuideID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Guide");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Reservation", b =>
+                {
+                    b.HasOne("EntityLayer.Concrete.AppUser", "AppUser")
+                        .WithMany("Reservations")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EntityLayer.Concrete.Destination", "Destination")
+                        .WithMany("Reservations")
+                        .HasForeignKey("DestinationID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
 
                     b.Navigation("Destination");
                 });
@@ -583,9 +743,23 @@ namespace DataAccessLayer.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.AppUser", b =>
+                {
+                    b.Navigation("Comments");
+
+                    b.Navigation("Reservations");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.Destination", b =>
                 {
                     b.Navigation("Comments");
+
+                    b.Navigation("Reservations");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Guide", b =>
+                {
+                    b.Navigation("Destinations");
                 });
 #pragma warning restore 612, 618
         }

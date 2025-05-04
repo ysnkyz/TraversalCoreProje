@@ -1,11 +1,11 @@
-﻿using System;
+﻿using BusinessLayer.Abstract;
+using DataAccessLayer.Abstract;
+using EntityLayer.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BusinessLayer.Abstract;
-using DataAccessLayer.Abstract;
-using EntityLayer.Concrete;
 
 namespace BusinessLayer.Concrete
 {
@@ -34,7 +34,7 @@ namespace BusinessLayer.Concrete
 
         public List<About> TGetList()
         {
-           return _aboutDal.GetList();
+            return _aboutDal.GetList();
         }
 
         public void TUpdate(About t)

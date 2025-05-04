@@ -1,8 +1,11 @@
-﻿using System.Threading.Tasks;
-using EntityLayer.Concrete;
+﻿using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using TraversalCoreProje.Models;
 
 namespace TraversalCoreProje.Controllers
@@ -24,7 +27,6 @@ namespace TraversalCoreProje.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public async Task<IActionResult> SignUp(UserRegisterViewModel p)
         {
@@ -33,7 +35,7 @@ namespace TraversalCoreProje.Controllers
                 Name = p.Name,
                 Surname = p.Surname,
                 Email = p.Mail,
-                UserName = p.Name,
+                UserName = p.Username
             };
             if (p.Password == p.ConfirmPassword)
             {
@@ -55,10 +57,11 @@ namespace TraversalCoreProje.Controllers
         }
 
         [HttpGet]
-        public IActionResult SignIn() 
+        public IActionResult SignIn()
         {
             return View();
         }
+        [HttpPost]
         public async Task<IActionResult> SignIn(UserSignInViewModel p)
         {
             if (ModelState.IsValid)
@@ -75,6 +78,5 @@ namespace TraversalCoreProje.Controllers
             }
             return View();
         }
-
     }
 }

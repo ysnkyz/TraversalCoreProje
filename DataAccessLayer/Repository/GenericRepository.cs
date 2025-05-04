@@ -1,12 +1,11 @@
-﻿using System;
+﻿using DataAccessLayer.Abstract;
+using DataAccessLayer.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using DataAccessLayer.Abstract;
-using DataAccessLayer.Concrete;
 
 namespace DataAccessLayer.Repository
 {
@@ -19,7 +18,7 @@ namespace DataAccessLayer.Repository
             c.SaveChanges();
         }
 
-        public T GetById(int id)
+        public T GetByID(int id)
         {
             using var c = new Context();
             return c.Set<T>().Find(id);
@@ -48,6 +47,7 @@ namespace DataAccessLayer.Repository
         {
             using var c = new Context();
             c.Update(t);
+            c.SaveChanges();
         }
     }
 }

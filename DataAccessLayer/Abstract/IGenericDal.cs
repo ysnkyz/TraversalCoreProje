@@ -4,7 +4,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using EntityLayer.Concrete;
 
 namespace DataAccessLayer.Abstract
 {
@@ -14,7 +13,7 @@ namespace DataAccessLayer.Abstract
         void Delete(T t);
         void Update(T t);
         List<T> GetList();
-        T GetById(int id);
+        T GetByID(int id);
         List<T> GetListByFilter(Expression<Func<T, bool>> filter);
     }
 }
